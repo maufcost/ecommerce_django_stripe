@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}cart_home.html{% endblock %}
+
+{% block current_page %}You are at cart_home.html{% endblock %}
+
+{% block content %}
+    <h1>Your Shopping Cart</h1>
+    {% if cart.products.exists %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for product in cart.products.all %}
+                        <th>{{ forloop.counter }}</th>
+                        <td>
+                            {{ product.title }}
+                            {% include 'products/snippets/update_cart.html' with product=product cart=cart in_cart=True%}
+                        </td>
+                        <td>{{ product.price }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Total: {{ cart.total }}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p>Your shopping cart is currently empty.</p>
+    {% endif %}
+
+{% endblock %}
+
+<!--
+'th' is used for header cells (contains header info)
+'td' is used for data cells (contains data)
+-->

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}product_detail.html{% endblock %}
+
+{% block current_page %}This is product_detail.html{% endblock %}
+
+{% block content %}
+
+    <!-- Displaying product information -->
+    <p><img src="{{ object.image.url }}" alt="{{ object.title }} Image"></p>
+    <p>{{ object.title }}</p>
+    <p>Posted {{ object.timestamp|timesince }} ago</p>
+    <p>{{ object.description }}</p>
+
+    <!-- Form that will update this user's cart (adding to or deleting this product
+    in it) -->
+    {% include 'products/snippets/update_cart.html' with product=object cart=cart %}
+
+{% endblock %}

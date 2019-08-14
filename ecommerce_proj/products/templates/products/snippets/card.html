@@ -1,0 +1,8 @@
+<div class="card">
+    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }} Image">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.description|truncatewords:12 }}</p>
+        <a href="{{ product.get_absolute_url }}" class="btn btn-success">View</a>
+    </div>
+</div>

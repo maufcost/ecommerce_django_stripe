@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}search_list.html{% endblock %}
+
+{% block current_page %}This is search_list.html{% endblock %}
+
+{% block content %}
+
+    {% if request.GET.q %}
+        <div class="row">
+            <div class="col-12">
+                <p>You searched for "{{ request.GET.q }}"</p>
+                <hr>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Displaying list of products. -->
+    <div class="row justify-content-center">
+        {% for product in object_list %}
+            <div class="col-12 col-lg-6">
+                {% include 'products/snippets/card.html' with instance=product %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

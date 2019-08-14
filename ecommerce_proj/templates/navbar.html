@@ -1,0 +1,57 @@
+<!-- Setting up the url patterns as variables so that we can compare them below
+to modify the css 'active' attribute depending on the page the user currently is. -->
+{% url 'home-upn' as home_url %}
+{% url 'about-upn' as about_url %}
+{% url 'product-list-upn' as product_list_url %}
+{% url 'cart-home-upn' as cart_home_url %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+
+    <div class="container">
+
+        <!-- Brand name -->
+        <a class="navbar-brand" href="{% url 'home-upn' %}">eCommerce</a>
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Anchors -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <!-- Home -->
+                <li class="nav-item {% if request.path == home_url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'home-upn' %}">Home</a> <!-- or 'home_url'-->
+                </li>
+
+                <!-- About -->
+                <li class="nav-item {% if request.path == about_url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'about-upn' %}">About</a>
+                </li>
+
+                <!-- List -->
+                <li class="nav-item {% if request.path == product_list_url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'product-list-upn' %}">List</a>
+                </li>
+
+                <!-- Cart home -->
+                <li class="nav-item {% if request.path == cart_home_url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'cart-home-upn' %}">
+                        {{ request.session.cart_num_items }}<i class="fas fa-shopping-cart"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search form -->
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search-product-list-upn' %}" method="GET">
+                <!-- The 'name' attribute here will hold a value that will be the name of the GET parameter -->
+                <input class="form-control mr-sm-2" name='q' type="search" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

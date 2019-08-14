@@ -1,0 +1,25 @@
+<!-- This form takes care of updating the cart based on the user's action on the
+product detail view (adding or removing product). -->
+
+<!-- The url could also be: url 'cart:cart-update-url' using the cart namespace. -->
+<form action="{% url 'cart-update-upn' %}" method="POST">
+
+    {% csrf_token %}
+    
+    <!-- Hidden form input tag that will submit the product id as a POST parameter
+    to the cart update view. -->
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+
+    {% if in_cart %}
+        <button type="submit">Remove</button>
+    {% else %}
+
+        <!-- Showing whether or not this product is in this user's cart  -->
+        {% if product in cart.products.all %}
+            <p>This product is in the cart.</p>
+            <button type="submit">Remove from cart</button>
+        {% else %}
+            <button type="submit">Add to cart</button>
+        {% endif %}
+    {% endif %}
+</form>

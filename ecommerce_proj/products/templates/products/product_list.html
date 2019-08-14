@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}product_list.html{% endblock %}
+
+{% block current_page %}This is product_list.html{% endblock %}
+
+{% block content %}
+
+    <!-- Displaying list of products. -->
+    <div class="row">
+        {% for product in object_list %}
+            <div class="col-12 col-lg-6">
+                {% include 'products/snippets/card.html' with instance=product %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
